@@ -1,0 +1,1070 @@
+Received: from SA6PR08MB10307.namprd08.prod.outlook.com (2603:10b6:806:408::9)
+ by SN4PR0801MB7693.namprd08.prod.outlook.com with HTTPS; Wed, 28 Aug 2024
+ 17:59:04 +0000
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=x99SoCugpe9XdN1FaQv2C/9Yboe0Bbk2RsdfZ0TF/pQ7mg8yiXSKaG/Y37Z6n9iK3HrY6TV6runwnjk3TXNBszO+KyizfRaZD6nvqryvF0Dx6mP8+GHB4w2lrJdw1yBpoRWJ+S4figkVewb8cW9m6v7zBeXdZsC6+xLQq9/sYilro1fAQiJncr/qgY0w3Infks04rSBFYlQNNdSPjFguHUVv0LavTDpAuPWEa6R0CyPwLLzylgsJd+snwrOxW6NNIASVTnqkJeFppSs6rWLN/O6jIR0D6mhnq6WDWkKJZsHcnkm7gC9OR0bjWcJ3oGxMAZwQeNUdXeKzkjwTx35baA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IXNV+exZ/SIL6a1tOaOXTG2L9uLB5LD2s5+kj6j9uCc=;
+ b=mUYgVUUEKORshoKu/lzaHeeKD7RQ7dkJMwi8pMcl6JEOqolmitMFy/MGRlc7jCJDMPDy12HEg73YkI9yggojLQWOjBoWoXe6Kbg2/nJ3O5i+fJNolrR0fetOJDTFUSWzJ74Qm3kVlzM/LJnwOe8kggUbIqx3XwLkjfUJM6nJ3JM02cI0wVxgs0Uky4rQasUYYseLe37oPUujtQV90ZbIFY+WXBxSob7FvdsK+d567ragW1Sucsl0vud4dzzdKxSI8QuFo2NwWAlBEgEz1kDyHM403Ojyvthx3D+ib6Q1M3zVHH1t3svIzwhp8u4XhZAeDDpNVhj3qGea6vpmJxeExg==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 52.101.61.143) smtp.rcpttodomain=lexisnexisrisk.com
+ smtp.mailfrom=pearson.com; dmarc=pass (p=reject sp=reject pct=100)
+ action=none header.from=pearson.com; dkim=pass (signature was verified)
+ header.d=pearson.com; dkim=fail (body hash did not verify)
+ header.d=pearson.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=pearson.com] dkim=[1,1,header.d=pearson.com]
+ dmarc=[1,1,header.from=pearson.com])
+Received: from PH8PR02CA0024.namprd02.prod.outlook.com (2603:10b6:510:2d0::16)
+ by SA6PR08MB10307.namprd08.prod.outlook.com (2603:10b6:806:408::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.25; Wed, 28 Aug
+ 2024 17:59:01 +0000
+Received: from CY4PEPF0000EDD3.namprd03.prod.outlook.com
+ (2603:10b6:510:2d0:cafe::49) by PH8PR02CA0024.outlook.office365.com
+ (2603:10b6:510:2d0::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.28 via Frontend
+ Transport; Wed, 28 Aug 2024 17:59:01 +0000
+Authentication-Results: spf=pass (sender IP is 52.101.61.143)
+ smtp.mailfrom=pearson.com; dkim=pass (signature was verified)
+ header.d=pearson.com;dmarc=pass action=none
+ header.from=pearson.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of pearson.com designates
+ 52.101.61.143 as permitted sender) receiver=protection.outlook.com;
+ client-ip=52.101.61.143; helo=DM1PR04CU001.outbound.protection.outlook.com;
+ pr=C
+Received: from DM1PR04CU001.outbound.protection.outlook.com (52.101.61.143) by
+ CY4PEPF0000EDD3.mail.protection.outlook.com (10.167.241.199) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7918.13 via Frontend Transport; Wed, 28 Aug 2024 17:59:01 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CYPhL4RpjKIaMWNjWcZVusU+BF/p9nweXa4/YNJeReCFxR4F8d6t2FHz7jt01ZFoHr6X2UHrpdaOfVwzCm/tDTTz3g1pUyfV54MsM78JkuNG/GGwCvyg/s5ihM/Y8fFfJi727KNWWrTvuBZS5D7ZimQoMstbUl0AFomuRHsL14XXhOD6/BJpNXrdEET6SCOat6yV5+2W4FdYYjR60tPAngmrKLFKSxSe/yUfCPiWZwNWm9cS/FiTKsp498t/quhmrclwDKBWs04PjEZ18aSdmnpgaoo1e0pq6BIQy4rdyGfBd7WpFvRXqTLC2M4HENjBtjPYB6yAxytEOkii7YAMYg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IXNV+exZ/SIL6a1tOaOXTG2L9uLB5LD2s5+kj6j9uCc=;
+ b=U7tsUHiPrmCH6lVe61iQsMx5Rd34n4sGsdyaQ5DGq1iAcs59JtRN/+156esL1SpmjLd71M/IdDdVUNYm4K0bY1zgLkEP3BQXmKin6xYuTi7WmO9DAyNxJVGreXgmrzU7/HrWgckSt4m++LK5lM8YyEHpGCLqhi75HVvaAnhyJp/7mcgbmWC/HmSl1m73ugk1/qhfR7soUXpQgGvEyHe2sf6mX4RQ35T0bfhuS3tYGP++EazF7Nhj8eMkDOmMqDyGMF7LjG/osMlCYCWglmY2TYpLuhrkCK0BZZoeNfAGvv+8e5ceeZ7JgKFR4xNniD3JmwxwEay3Xe9bPWw5Qb9ZEg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 159.182.1.201) smtp.rcpttodomain=lexisnexisrisk.com
+ smtp.mailfrom=pearson.com; dmarc=pass (p=reject sp=reject pct=100)
+ action=none header.from=pearson.com; dkim=pass (signature was verified)
+ header.d=pearson.com; arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pearson.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IXNV+exZ/SIL6a1tOaOXTG2L9uLB5LD2s5+kj6j9uCc=;
+ b=dDYCpaNpaYOrJh1DKS7/qKJpakQ3KBd1FTxMUHvdVhunGmyqyFZ3emX7wZbjHcfBg7ja5O7DvUhW5655GpM9+TmtEhCSSIK6PZCDGajfGKdpyngVmgGjkdz1GuTR/pC/wP0nrVx41spVdPSzO4noHZ2amCzPE+0LkHIzolvR5Y8Fg3zYH+6n1wtMYcULdYf03nPxOZW4hGQAg17twuXSTiOZztHQvJNzborwQf8UEqZ0G8POMgOUgehiF1i9xQRGtNZlBkt59mpQTcIngZaYEaCWWLM4MwexfuGKN/z87wXSJ42WcrJHNVUV0Fv2XzDpfN+owthtcKxbmo/17XbQ2g==
+Received: from PH2PEPF0000385B.namprd17.prod.outlook.com (2603:10b6:518:1::69)
+ by SA1PR07MB9117.namprd07.prod.outlook.com (2603:10b6:806:1f4::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7875.19; Wed, 28 Aug
+ 2024 17:58:57 +0000
+Received: from CY4PEPF0000E9D5.namprd05.prod.outlook.com
+ (2a01:111:f403:c936::) by PH2PEPF0000385B.outlook.office365.com
+ (2603:1036:903:48::3) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.23 via Frontend
+ Transport; Wed, 28 Aug 2024 17:58:57 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 159.182.1.201)
+ smtp.mailfrom=pearson.com; dkim=pass (signature was verified)
+ header.d=pearson.com;dmarc=pass action=none header.from=pearson.com;
+Received-SPF: Pass (protection.outlook.com: domain of pearson.com designates
+ 159.182.1.201 as permitted sender) receiver=protection.outlook.com;
+ client-ip=159.182.1.201; helo=icdrelay2.mx.pearson.com; pr=C
+Received: from icdrelay2.mx.pearson.com (159.182.1.201) by
+ CY4PEPF0000E9D5.mail.protection.outlook.com (10.167.241.68) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7918.13 via Frontend Transport; Wed, 28 Aug 2024 17:58:55 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=pearson.com; i=@pearson.com; q=dns/txt; s=IronPort;
+  t=1724867936; x=1756403936;
+  h=date:from:to:message-id:subject:mime-version;
+  bh=cSCr10Ufr4mR8BKzdKS3eA0F1aRF2rS//DKBWTw95HM=;
+  b=nZUceG9uoT8OnvPphsHX5D3ihdJdQSHbCc36zyIwZBGDgW6klmSBUuQX
+   uMFL0B7jQYOmsmiH61h5qULx2ZZBR7mp7nGc7tUOi7t/JzQNkadBwArFf
+   ToL05fZgumPkyI+sg+zsl2++7XOFTotYxt5RsT95EIUjI4Ft3hRtJoZga
+   c=;
+X-IronPort-AV: E=Sophos;i="6.03,271,1694754000"; 
+   d="scan'208,217";a="596175133"
+Received: from iowacbipvuesmtp02.pv.local (HELO hubprd3e.pv.local) ([10.25.246.12])
+  by icdrelay2.mx.pearson.com with ESMTP; 28 Aug 2024 12:58:55 -0500
+Date: Wed, 28 Aug 2024 12:58:55 -0500 (CDT)
+From: PearsonVUEConfirmation@pearson.com
+To: navreen.kaur@lexisnexisrisk.com
+Message-ID: <1813414015.903401.1724867935478@hubprd3e.pv.local>
+Subject: Your OnVUE exam is confirmed! Now take your required system test.
+Content-Type: multipart/mixed; 
+	boundary="----=_Part_903400_1394642358.1724867935470"
+Return-Path: PearsonVUEConfirmation@pearson.com
+X-EOPAttributedMessage: 1
+X-MS-TrafficTypeDiagnostic:
+ CY4PEPF0000E9D5:EE_|SA1PR07MB9117:EE_|CY4PEPF0000EDD3:EE_|SA6PR08MB10307:EE_|SN4PR0801MB7693:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1b319806-442b-401c-d213-08dcc78b18fe
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|376014|82310400026|1800799024|36860700013|1032899013|69100299015;
+X-Microsoft-Antispam-Message-Info-Original:
+ =?us-ascii?Q?+zB5H5/mOCkTQMurY7QLfmMkR2bzs4ZBs3gG3LpwVGLZMGxb6PcCaA7rfgTI?=
+ =?us-ascii?Q?Y//oYwFLxSTk4hIih3u25Yp3g8kR7PpAanI8A+ilTq0XOVP8zsHclJ4cE67z?=
+ =?us-ascii?Q?3SRjPHAFDKAsVhXSBC0gu4pIHEt3MROHDidnivR5kZM7TZCrl3GJTxIyUb4j?=
+ =?us-ascii?Q?ISU/dihPriYFC1ZypQJ5UdHYgtZrdNkAPfcrtdgOnYI6sILkscq2nf9sCjwY?=
+ =?us-ascii?Q?mOCLWpye3lWUl/p2217BK43KtzNNZHVQ2cf0nZ49kZo4+OnaWJSyweZt6flK?=
+ =?us-ascii?Q?/SExATpKQjpMeBkEKwlZI7Ykq7AZV88PdrpDSI6iKOT7xDbfMmphf376pC3k?=
+ =?us-ascii?Q?c+ux3CWNNlBG6tKEAiDdySUvRqdDqcYvC9FY5sLv1AJTAx51JYpjYouWGg1W?=
+ =?us-ascii?Q?R+99owuzoAbo0vf1TdlxXt2bDgAUv3aS4H9DqZltGTBr3ZsXakha4Ny77KDe?=
+ =?us-ascii?Q?qyjQXzSVwyHvRoRIWr3KolNWFYLi1HmWgk4f0Fxp6wmFSDV6n+MOydVoh4uK?=
+ =?us-ascii?Q?GBfGTQVmuPCIvRcWn6n23zL7GEBqWKmFX0g1tyBTCEUpUOt3Sk48r/s76Yw+?=
+ =?us-ascii?Q?KxbCE4iN1jkVowDt3sMeFArcCR4ucxcMjPG1UQA7S8xyfkhIn6pFdaTmfHKV?=
+ =?us-ascii?Q?Cq+yyiB3bmPsljD33F9hZRcdgf8jHMflc0FZQrb2pN33aEOnVscdD2MxjJoX?=
+ =?us-ascii?Q?gco76w9awMZLhwA2hdLxU0i1DlqPvRBYNOFP5t0GbAYMktbYRMu8BP6Q3qV9?=
+ =?us-ascii?Q?w9UWDqulTyV5wyayK6CkM8QDHIXqvtJ20A67TFvjBSF7vEPmUKk0rMn/eeOK?=
+ =?us-ascii?Q?HzJGsAxOm/opxGsnxu7vssCqZilpZ9+YeRCeq/9YXaZoxvHNcDIvfIH+Vj9v?=
+ =?us-ascii?Q?xwoFFqRDOLV02u+kYCeanUgg+aN26nkevEO2jxOvTYAgwHlMlpZ50tNTnBkm?=
+ =?us-ascii?Q?XyVrGRkoCr3jgO63zmu6IfRs2YBrE8Ye6Z+hoLXpZZLwXeCvk+KcDnHAPzR2?=
+ =?us-ascii?Q?Ka/d5MIwi5Z6PKt6+jELxCkBRuvviWHwHRYeAtrEshyDIx/yvmA7MlIqPcDQ?=
+ =?us-ascii?Q?cVJV/6q/XGDlJD8wLrQp8pRpK57APY05cCh3TLb2bpJTAXGI0D0Q+PgLhzRx?=
+ =?us-ascii?Q?50H8di1ouFif9y9zdxFsi3BRIJpqFI4LPLM2TAcfO1nPtDNLnKvtdnLAhikM?=
+ =?us-ascii?Q?lkDY+6LCKoc6HaIIogPvsnEolgw0p8tONqAc8/pmd7O3EL1hOLxxx5RlPr/a?=
+ =?us-ascii?Q?S3fpNjl/FnhcjcQ9RgqyqO4CIpC7xone5G7DcTqnRkNYuMWNVwAykiQssXmV?=
+ =?us-ascii?Q?/orowZr/TqSG5lzsyp90JFQePM2ijeZg77APN71lb98XxkwoNUs2DThj03mc?=
+ =?us-ascii?Q?2z3q63bFYOjDb+SAqxh8vIWJEEyB4DQbz061UC1KClt4nQeXEQ=3D=3D?=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:159.182.1.201;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:icdrelay2.mx.pearson.com;PTR:icdrelay2.mx.pearson.com;CAT:NONE;SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013)(1032899013)(69100299015);DIR:OUT;SFP:1102;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR07MB9117
+X-MS-Exchange-Organization-ExpirationStartTime: 28 Aug 2024 17:59:01.3502
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id:
+ 1b319806-442b-401c-d213-08dcc78b18fe
+X-EOPTenantAttributedMessage: 9274ee3f-9425-4109-a27f-9fb15c10675d:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ CY4PEPF0000EDD3.namprd03.prod.outlook.com
+X-MS-Exchange-Transport-CrossTenantHeadersPromoted:
+ CY4PEPF0000EDD3.namprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Exchange-Organization-AuthSource:
+ CY4PEPF0000EDD3.namprd03.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+ 68835083-a723-4781-bc52-08dcc78b15e4
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam:
+ BCL:0;ARA:13230040|13102899012|13012899012|3092899012|5062899012|2092899012|47022699003|3072899012|1032899013|12012899012|35042699022|69100299015|4123199012|5073199012|5063199012;
+X-Forefront-Antispam-Report:
+ CIP:52.101.61.143;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM1PR04CU001.outbound.protection.outlook.com;PTR:mail-centralusazon11020143.outbound.protection.outlook.com;CAT:NONE;SFTY:9.25;SFS:(13230040)(13102899012)(13012899012)(3092899012)(5062899012)(2092899012)(47022699003)(3072899012)(1032899013)(12012899012)(35042699022)(69100299015)(4123199012)(5073199012)(5063199012);DIR:INB;SFTY:9.25;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Aug 2024 17:59:01.2408
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1b319806-442b-401c-d213-08dcc78b18fe
+X-MS-Exchange-CrossTenant-Id: 9274ee3f-9425-4109-a27f-9fb15c10675d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=8cc434d7-97d0-47d3-b5c5-14fe0e33e34b;Ip=[159.182.1.201];Helo=[icdrelay2.mx.pearson.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+ CY4PEPF0000EDD3.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA6PR08MB10307
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:03.0711366
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.7897.027
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(944506478)(944626604)(920097)(930097)(140003)(1420198);
+X-Microsoft-Antispam-Message-Info:
+	=?windows-1256?Q?+5trbmCJpTWZQpVWUOxTzuvhwewp4nj0rvhVMPOVu0lkQJzeJ5FhA2ZO?=
+ =?windows-1256?Q?YqAQ9uKtDUBGxkW1DlVEk7veZSP0Qtb21sdOUk3HgNL3asFFbptsHSYG?=
+ =?windows-1256?Q?orsP+PXVAiOxOf9kiEoBrM5FiTXDtd8RUcz9Yn6rC+Tl9svI5AQvxjcT?=
+ =?windows-1256?Q?AHH4JDJc3w4YGtUOSHkTPWFZRnBsZ4neNPB2JxbVRKYEOprsjugiEkRv?=
+ =?windows-1256?Q?jtNojL1k1pKUb2CGxlmPrL7vEEdzh521AjlY4tFWXJD9JxdNi82IM95/?=
+ =?windows-1256?Q?vuym+clvWHHQFBHQPb/EWX7Ig5sYYCXCWFaD1KlefyzSgzMWHFmDxaC4?=
+ =?windows-1256?Q?hivRS8qZMvpbSgEWoc/fWxtRCjv1y/8E8hHTv1wE8DdZWrrBAYh93Wc2?=
+ =?windows-1256?Q?AuCTK9nWbTH7QW+AvCsDeVkGlKyXptfruTv4pDeijb0ZDzoU77OufAho?=
+ =?windows-1256?Q?I/Zns94bKYpy2gVCCTdLTR6rsT80KGXxdipeH/0A3rmPAS9ejyxy4rP7?=
+ =?windows-1256?Q?olgqpO0SyOCj4Q4c3bv81EK87XErbDQv9Sb8+UC8UycCGxRvikS32VnW?=
+ =?windows-1256?Q?Os2ixmhbqtI33iakNRXNuO51ykjFtG+dO7XE5YKCjrhKaZ10v/0MZbdM?=
+ =?windows-1256?Q?kMh3WRtXPjkTHfbrfst0njun2ZKN1k4htE/1Xc9gnviNx2IUkMydfWGt?=
+ =?windows-1256?Q?wDnWqRMcO1L9nLaA5pRaSKuORgiL/N0DFL0COGEJJt7HWbRFYIaa+RBn?=
+ =?windows-1256?Q?H0Zic8Zuy2IBM7O3O9yUERut1tSgM82PZdJq+ShLKMjjkec1CUU0r/Bl?=
+ =?windows-1256?Q?SA5qTj0KKGKGn7k4i8GMHCH39XcpHYrTN9i1MtlLyjlXda201EOg5Rb9?=
+ =?windows-1256?Q?M9VAMQ5Smcg4QbQcUUPkweA5S30sZRaz8UEWqY3G/uRKFDQaAfZAVdjm?=
+ =?windows-1256?Q?UhIuQ/CUz9Yqjf6jlyLzKD7n1cnI4N4bAPDFIi0g5EVNiGKFF/7ElAEd?=
+ =?windows-1256?Q?LOhIOI+9wukSAyL45s2ELIrPnUKzs52L0WOAVlo+piaegcj+Kr+MLo1n?=
+ =?windows-1256?Q?XuPBa1rtmUZs9GaRCw1ph8dk2ylnlhiaH1+1kfruOsI/DFSzkWyvWv57?=
+ =?windows-1256?Q?gZZlHwICAaK4hn73rNtt1z6YgJiHIV+NePptnPGBmxQq0DHro/+hc9g1?=
+ =?windows-1256?Q?DCWN0PKMALtP7HDemDk30ZValDmjxM9Txx6ulUDfXhVwk1kMFFsCwWZn?=
+ =?windows-1256?Q?cawtngKLD4Oj0G7BKW0i4ZFlokjwFaky6pBvbwOfqkV/EA71mqSxrhaf?=
+ =?windows-1256?Q?Wr9K6GkGzZS7Nvo5OZMY4dWjbeSc/r836/hTc/t207x6+o27lR4Y06g4?=
+ =?windows-1256?Q?WnH9V+ctwOuaEKnQChToQuURls1cyEQ97YZM60wD1pgxZjLd74RNgo37?=
+ =?windows-1256?Q?70F4v0Vlbu2p2/PootZU47583J+2o0pk3FQGPz/z1ktRPih1MNMpw7aw?=
+ =?windows-1256?Q?60dQbrJyZBHOdxRaNusw+hlKz4Hu4wJ7Tx3PHlGjTYLWNPOsXHJLX+lp?=
+ =?windows-1256?Q?uYYyopFs1kkRtEeTPpeP0CoqGKNr6XR7NvmrK1414BNCM3NlXTjOLgfU?=
+ =?windows-1256?Q?+nrqAnFX+xBQXGomDtbipn4OfUhcC8XHdbmjeOD43lxFiliyXnIgzDlJ?=
+ =?windows-1256?Q?q6wHGv0lX3iePR3YSgsdFLDyAhXnHsLOGuRM6oU1CyaU1hwFSAnmxSM2?=
+ =?windows-1256?Q?fRmJBWLJiqJNXV3dLx4KUrbCUXjiK44QcX0WVtj+YgSVbIIODGiYtMoc?=
+ =?windows-1256?Q?RnWo9kNQxetna66cSSrtQRx8aqGUAs4y29SOENCrh6Kmgy+/FWJ3MONJ?=
+ =?windows-1256?Q?rt6Db6nhBPdxKurL4UUYu9immAOhkI69wfUcA3r7hvrLEdYQ6WF5L19b?=
+ =?windows-1256?Q?LJ1fRoQ5xDTN0TWEsuwDMXOH7iQWyJiaVmbShKIvMg0e8rcBhaMLcE1g?=
+ =?windows-1256?Q?NnlpXS52v6xoTtzn2I6CIRSVhJFpHI/t0uRm7jC6gGidJ2mjt/LiReS7?=
+ =?windows-1256?Q?Qf692vt3A2NwGFz7C0d0oorjWBNbBiW4dKpu/hAMT3UwxG3qxSz78/Yl?=
+ =?windows-1256?Q?ixfOKXkaMdq2GRZuyhawHwN2D4BKRqoq6MFRMMyCYnoChpJI2qZu4duO?=
+ =?windows-1256?Q?imURw+dv+QTNeloRRJ+sTWMk3hNLuyKw/nImlw3VspmwjsO8eWsduDM2?=
+ =?windows-1256?Q?queXTrEGkRJ8TXldFNZVJUH8zr0AOtqb07GqbGvO?=
+MIME-Version: 1.0
+
+------=_Part_903400_1394642358.1724867935470
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><s=
+tyle type=3D"text/css">
+
+			a:link {
+				color: #007FA3; text-decoration: underline;
+			}
+
+			a:active {
+				color: #007FA3; text-decoration: underline;
+			}
+
+			a:visited {
+				color: #007FA3; text-decoration: underline;
+			}
+
+			a:hover {
+				color: #007FA3; text-decoration: underline;
+			}
+
+			img {
+				border-color: transparent
+			}
+
+			.LabelDataGridLabel {
+				vertical-align: top;
+				width: 300px=20
+			}
+
+			ul {
+				direction: ltr;
+			}
+
+			td {
+				font-family:Arial,sans-serif;
+				font-size: 10pt
+			}
+
+hr {
+height:0.75pt;
+background-color: black;
+margin-left: auto; margin-right: auto; <!-- align=3D"center" -->
+}
+
+.productTable{
+border:1px solid black;
+border-collapse:collapse;
+width:100%;
+text-align: left;
+font-family:Arial;
+font-size: 10pt;
+margin-bottom:10px;
+}
+
+.productInfo{
+border:1px solid black;
+border-collapse:collapse;
+width:100px;
+text-align: left;
+font-family:Arial;
+font-size: 10pt;
+}
+.productItem{
+border:1px solid black;
+border-collapse:collapse;
+text-align: left;
+font-family:Arial;
+font-size: 10pt;
+}
+
+
+
+		</style>
+</head>
+<body lang=3D"en" dir=3D"ltr">
+<table border=3D"0" cellspacing=3D"0" cellpadding=3D"0" width=3D"100%" styl=
+e=3D" aspect-ratio: revert !important; background: revert !important; block=
+-size: revert !important; border: revert !important; bottom: revert !import=
+ant; color: revert !important; color-scheme: revert !important; content-vis=
+ibility: revert !important; cursor: revert !important; direction: revert !i=
+mportant; display: revert !important; font-size: revert !important; height:=
+ revert !important; hyphens: revert !important; letter-spacing: revert !imp=
+ortant; line-height: revert !important; margin: revert !important; opacity:=
+ revert !important; order: revert !important; outline: revert !important; o=
+verflow: revert !important; padding: revert !important; position: revert !i=
+mportant; resize: revert !important; rotate: revert !important; scale: reve=
+rt !important; tab-size: revert !important; table-layout: revert !important=
+; text-align: revert !important; text-indent: revert !important; text-orien=
+tation: revert !important; text-overflow: revert !important; text-shadow: r=
+evert !important; text-transform: revert !important; text-wrap: revert !imp=
+ortant; top: revert !important; transition: revert !important; user-select:=
+ revert !important; vertical-align: revert !important; visibility: revert !=
+important; white-space: revert !important; width: revert !important; word-b=
+reak: revert !important; word-spacing: revert !important; writing-mode: rev=
+ert !important; zoom: revert !important; cellpadding: 0 !important; border:=
+ 0 !important; cellspacing: 0 !important; display: table !important; width:=
+ 100% !important; table-layout: fixed !important; border-collapse: seperate=
+ !important; float: none !important; border-spacing: 0px 0px !important; " =
+align=3D"left">
+<tbody style=3D" aspect-ratio: revert !important; background: revert !impor=
+tant; block-size: revert !important; border: revert !important; bottom: rev=
+ert !important; color: revert !important; color-scheme: revert !important; =
+content-visibility: revert !important; cursor: revert !important; direction=
+: revert !important; display: revert !important; font-size: revert !importa=
+nt; height: revert !important; hyphens: revert !important; letter-spacing: =
+revert !important; line-height: revert !important; margin: revert !importan=
+t; opacity: revert !important; order: revert !important; outline: revert !i=
+mportant; overflow: revert !important; padding: revert !important; position=
+: revert !important; resize: revert !important; rotate: revert !important; =
+scale: revert !important; tab-size: revert !important; table-layout: revert=
+ !important; text-align: revert !important; text-indent: revert !important;=
+ text-orientation: revert !important; text-overflow: revert !important; tex=
+t-shadow: revert !important; text-transform: revert !important; text-wrap: =
+revert !important; top: revert !important; transition: revert !important; u=
+ser-select: revert !important; vertical-align: revert !important; visibilit=
+y: revert !important; white-space: revert !important; width: revert !import=
+ant; word-break: revert !important; word-spacing: revert !important; writin=
+g-mode: revert !important; zoom: revert !important; display: block !importa=
+nt; ">
+<tr style=3D" aspect-ratio: revert !important; background: revert !importan=
+t; block-size: revert !important; border: revert !important; bottom: revert=
+ !important; color: revert !important; color-scheme: revert !important; con=
+tent-visibility: revert !important; cursor: revert !important; direction: r=
+evert !important; display: revert !important; font-size: revert !important;=
+ height: revert !important; hyphens: revert !important; letter-spacing: rev=
+ert !important; line-height: revert !important; margin: revert !important; =
+opacity: revert !important; order: revert !important; outline: revert !impo=
+rtant; overflow: revert !important; padding: revert !important; position: r=
+evert !important; resize: revert !important; rotate: revert !important; sca=
+le: revert !important; tab-size: revert !important; table-layout: revert !i=
+mportant; text-align: revert !important; text-indent: revert !important; te=
+xt-orientation: revert !important; text-overflow: revert !important; text-s=
+hadow: revert !important; text-transform: revert !important; text-wrap: rev=
+ert !important; top: revert !important; transition: revert !important; user=
+-select: revert !important; vertical-align: revert !important; visibility: =
+revert !important; white-space: revert !important; width: revert !important=
+; word-break: revert !important; word-spacing: revert !important; writing-m=
+ode: revert !important; zoom: revert !important; ">
+<td valign=3D"middle" width=3D"1px" bgcolor=3D"#A6A6A6" cellpadding=3D"7px =
+2px 7px 2px" style=3D" aspect-ratio: revert !important; background: revert =
+!important; block-size: revert !important; border: revert !important; botto=
+m: revert !important; color: revert !important; color-scheme: revert !impor=
+tant; content-visibility: revert !important; cursor: revert !important; dir=
+ection: revert !important; display: revert !important; font-size: revert !i=
+mportant; height: revert !important; hyphens: revert !important; letter-spa=
+cing: revert !important; line-height: revert !important; margin: revert !im=
+portant; opacity: revert !important; order: revert !important; outline: rev=
+ert !important; overflow: revert !important; padding: revert !important; po=
+sition: revert !important; resize: revert !important; rotate: revert !impor=
+tant; scale: revert !important; tab-size: revert !important; table-layout: =
+revert !important; text-align: revert !important; text-indent: revert !impo=
+rtant; text-orientation: revert !important; text-overflow: revert !importan=
+t; text-shadow: revert !important; text-transform: revert !important; text-=
+wrap: revert !important; top: revert !important; transition: revert !import=
+ant; user-select: revert !important; vertical-align: revert !important; vis=
+ibility: revert !important; white-space: revert !important; width: revert !=
+important; word-break: revert !important; word-spacing: revert !important; =
+writing-mode: revert !important; zoom: revert !important; padding: 7px 2px =
+7px 2px !important; background-color: #A6A6A6 !important; valign: middle !i=
+mportant; width: 0px !important; ">
+</td>
+<td valign=3D"middle" width=3D"100%" bgcolor=3D"#EAEAEA" cellpadding=3D"7px=
+ 5px 7px 15px" color=3D"#212121" style=3D" aspect-ratio: revert !important;=
+ background: revert !important; block-size: revert !important; border: reve=
+rt !important; bottom: revert !important; color: revert !important; color-s=
+cheme: revert !important; content-visibility: revert !important; cursor: re=
+vert !important; direction: revert !important; display: revert !important; =
+font-size: revert !important; height: revert !important; hyphens: revert !i=
+mportant; letter-spacing: revert !important; line-height: revert !important=
+; margin: revert !important; opacity: revert !important; order: revert !imp=
+ortant; outline: revert !important; overflow: revert !important; padding: r=
+evert !important; position: revert !important; resize: revert !important; r=
+otate: revert !important; scale: revert !important; tab-size: revert !impor=
+tant; table-layout: revert !important; text-align: revert !important; text-=
+indent: revert !important; text-orientation: revert !important; text-overfl=
+ow: revert !important; text-shadow: revert !important; text-transform: reve=
+rt !important; text-wrap: revert !important; top: revert !important; transi=
+tion: revert !important; user-select: revert !important; vertical-align: re=
+vert !important; visibility: revert !important; white-space: revert !import=
+ant; width: revert !important; word-break: revert !important; word-spacing:=
+ revert !important; writing-mode: revert !important; zoom: revert !importan=
+t; width: 100% !important; background-color: #EAEAEA !important; padding: 7=
+px 5px 7px 15px !important; font-family: wf_segoe-ui_normal, Segoe UI, Sego=
+e WP, Tahoma, Arial, sans-serif !important; font-size: 12px !important; fon=
+t-weight: normal !important; color: #212121 !important; text-align: left !i=
+mportant; word-wrap: break-word !important; ">
+<div style=3D" aspect-ratio: revert !important; background: revert !importa=
+nt; block-size: revert !important; border: revert !important; bottom: rever=
+t !important; color: revert !important; color-scheme: revert !important; co=
+ntent-visibility: revert !important; cursor: revert !important; direction: =
+revert !important; display: revert !important; font-size: revert !important=
+; height: revert !important; hyphens: revert !important; letter-spacing: re=
+vert !important; line-height: revert !important; margin: revert !important;=
+ opacity: revert !important; order: revert !important; outline: revert !imp=
+ortant; overflow: revert !important; padding: revert !important; position: =
+revert !important; resize: revert !important; rotate: revert !important; sc=
+ale: revert !important; tab-size: revert !important; table-layout: revert !=
+important; text-align: revert !important; text-indent: revert !important; t=
+ext-orientation: revert !important; text-overflow: revert !important; text-=
+shadow: revert !important; text-transform: revert !important; text-wrap: re=
+vert !important; top: revert !important; transition: revert !important; use=
+r-select: revert !important; vertical-align: revert !important; visibility:=
+ revert !important; white-space: revert !important; width: revert !importan=
+t; word-break: revert !important; word-spacing: revert !important; writing-=
+mode: revert !important; zoom: revert !important; ">
+You don't often get email from pearsonvueconfirmation@pearson.com. <a href=
+=3D"https://aka.ms/LearnAboutSenderIdentification">
+Learn why this is important</a> </div>
+</td>
+<td valign=3D"middle" align=3D"left" width=3D"75px" bgcolor=3D"#EAEAEA" cel=
+lpadding=3D"7px 5px 7px 5px" color=3D"#212121" style=3D" aspect-ratio: reve=
+rt !important; background: revert !important; block-size: revert !important=
+; border: revert !important; bottom: revert !important; color: revert !impo=
+rtant; color-scheme: revert !important; content-visibility: revert !importa=
+nt; cursor: revert !important; direction: revert !important; display: rever=
+t !important; font-size: revert !important; height: revert !important; hyph=
+ens: revert !important; letter-spacing: revert !important; line-height: rev=
+ert !important; margin: revert !important; opacity: revert !important; orde=
+r: revert !important; outline: revert !important; overflow: revert !importa=
+nt; padding: revert !important; position: revert !important; resize: revert=
+ !important; rotate: revert !important; scale: revert !important; tab-size:=
+ revert !important; table-layout: revert !important; text-align: revert !im=
+portant; text-indent: revert !important; text-orientation: revert !importan=
+t; text-overflow: revert !important; text-shadow: revert !important; text-t=
+ransform: revert !important; text-wrap: revert !important; top: revert !imp=
+ortant; transition: revert !important; user-select: revert !important; vert=
+ical-align: revert !important; visibility: revert !important; white-space: =
+revert !important; width: revert !important; word-break: revert !important;=
+ word-spacing: revert !important; writing-mode: revert !important; zoom: re=
+vert !important; width: 75px !important; background-color: #EAEAEA !importa=
+nt; padding: 7px 5px 7px 5px !important; font-family: wf_segoe-ui_normal, S=
+egoe UI, Segoe WP, Tahoma, Arial, sans-serif !important; font-size: 12px !i=
+mportant; font-weight: normal !important; color: #212121 !important; text-a=
+lign: left !important; word-wrap: break-word !important; align: left !impor=
+tant; ">
+</td>
+</tr>
+</tbody>
+</table>
+<div>
+<p><span style=3D"color: #000000 !important; background-color: #ff4f00"><st=
+rong>*** External email: use caution ***</strong></span></p>
+<p>&nbsp;</p>
+<div>
+<div style=3D"font-family:Arial;
+        font-size: 10pt;
+        text-align: left;
+        direction: ltr">
+<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" style=3D"    bord=
+er-style:none;
+               border-collapse:collapse;
+               margin-bottom: 10px;=20
+               font-family:Arial;
+               font-size:10pt;
+               text-align: center;" dir=3D"ltr">
+<tbody>
+<tr>
+<td valign=3D"bottom" align=3D"left" width=3D"33%">&nbsp; </td>
+<td valign=3D"bottom" align=3D"center" width=3D"33%"><img src=3D"http://wsr=
+.pearsonvue.com/pvueimages/webii/logos/MICROSOFT.gif">
+</td>
+<td valign=3D"bottom" align=3D"right" width=3D"33%">&nbsp; </td>
+</tr>
+</tbody>
+</table>
+<div style=3D"text-align: center;">
+<p>**PLEASE DO NOT RESPOND TO THIS E-MAIL**</p>
+</div>
+<div style=3D"text-align: center; font-size: 14pt">
+<p><b>Confirmation of Your Scheduled Exam</b></p>
+</div>
+<p>This e-mail contains important information about the exam(s) you schedul=
+ed and the rules. Please ensure these details are correct. If any informati=
+on is not correct, please contact
+<a href=3D"https://nam11.safelinks.protection.outlook.com/?url=3Dhttps%3A%2=
+F%2Furldefense.proofpoint.com%2Fv2%2Furl%3Fu%3Dhttps-3A__home.pearsonvue.co=
+m_Test-2Dtakers_Customer-2Dservice.aspx%26d%3DDwMFaQ%26c%3D0YLnzTkWOdJlub_y=
+7qAx8Q%26r%3D35KP95uI3A416QEAJbZha9sQ9z4SKxYfyXW1GHKXqpg%26m%3D-EdInIowN2FM=
+yIaKG2ocrxzqupPw78PXk3KCeMWpm6g%26s%3Dr2LoO6aZtFajCb7DJrFskgnxPlA9VFa607P_4=
+tfVAaQ%26e%3D&amp;data=3D05%7C02%7Cnavreen.kaur%40lexisnexisrisk.com%7C1b31=
+9806442b401cd21308dcc78b18fe%7C9274ee3f94254109a27f9fb15c10675d%7C0%7C0%7C6=
+38604647444166458%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luM=
+zIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&amp;sdata=3D9NgDWEbg7I1Thy91=
+D87gjgrusCEHBzs%2BOim%2Fe%2FkBWHc%3D&amp;reserved=3D0" originalsrc=3D"https=
+://urldefense.proofpoint.com/v2/url?u=3Dhttps-3A__home.pearsonvue.com_Test-=
+2Dtakers_Customer-2Dservice.aspx&amp;d=3DDwMFaQ&amp;c=3D0YLnzTkWOdJlub_y7qA=
+x8Q&amp;r=3D35KP95uI3A416QEAJbZha9sQ9z4SKxYfyXW1GHKXqpg&amp;m=3D-EdInIowN2F=
+MyIaKG2ocrxzqupPw78PXk3KCeMWpm6g&amp;s=3Dr2LoO6aZtFajCb7DJrFskgnxPlA9VFa607=
+P_4tfVAaQ&amp;e=3D" shash=3D"uxG2mB2GRTYPNyUVv7WN1uVVZXTVqclWmWXxR/Qzo063dK=
+XBLp+49pwHN0QTM6UAyCmi2HXQ1Kp/HxtZIaIoW9kCwdNVLHdAw/oJwvl2a4hAW45ONNx+tEcQ2=
++0p6lQGsRY66BXPsOaS70hQ/PLKo9lYn3UZHZwBHHsrUc/DjQI=3D" target=3D"_blank" re=
+l=3D"noopener">
+Pearson VUE</a> immediately.<br>
+<br>
+Thanks for scheduling your Microsoft Certification exam! You=E2=80=99re on =
+your way to earning an industry-recognized credential validating your skill=
+s, and we wish you success as you continue your learning journey. Please be=
+ sure to mark your calendars and follow
+ the steps below to prepare for your exam session. If you are unable to tak=
+e your exam at your scheduled time,
+<strong>please be sure to cancel or reschedule your appointment at </strong=
+><a href=3D"https://nam11.safelinks.protection.outlook.com/?url=3Dhttps%3A%=
+2F%2Faka.ms%2Fexamreschedule&amp;data=3D05%7C02%7Cnavreen.kaur%40lexisnexis=
+risk.com%7C1b319806442b401cd21308dcc78b18fe%7C9274ee3f94254109a27f9fb15c106=
+75d%7C0%7C0%7C638604647444178570%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMD=
+AiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&amp;sdata=3D5=
+9hM7%2Bd54jAqtm%2B7djXmyaqsYDXDHS3wuwjBb2vf0J0%3D&amp;reserved=3D0" origina=
+lsrc=3D"https://aka.ms/examreschedule" shash=3D"UP6XIiQ5AOySlvhnaqlKMgwPy4D=
+86Yw/pG6y4ToHvNGwhVwU2LFGHvol6Oeabtdd9lJowP6+wVwzKiBakwwia5pC/77KQrTL/E2/Ml=
+z0o0nc3L2VOtmlhsFoh6KDvpmDmaS4UQAvtI1W0VteqG9/KPnlYl2gcsdKWpFBg3IrsVg=3D">a=
+ka.microsoft/examreschedule</a>
+<strong>no later than 24 hours prior</strong> to your scheduled exam time.<=
+br>
+<br>
+</p>
+<p>Microsoft has several <a href=3D"https://nam11.safelinks.protection.outl=
+ook.com/?url=3Dhttps%3A%2F%2Flearn.microsoft.com%2Fen-us%2Fcredentials%2Fce=
+rtifications%2Fprepare-exam&amp;data=3D05%7C02%7Cnavreen.kaur%40lexisnexisr=
+isk.com%7C1b319806442b401cd21308dcc78b18fe%7C9274ee3f94254109a27f9fb15c1067=
+5d%7C0%7C0%7C638604647444189725%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDA=
+iLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&amp;sdata=3DdT=
+DjMpXoerXKKymjjM3oM%2FgofRERPZC%2Fd%2Bh4s%2B9usAk%3D&amp;reserved=3D0" orig=
+inalsrc=3D"https://learn.microsoft.com/en-us/credentials/certifications/pre=
+pare-exam" shash=3D"WFNLWRYQ1eDzBVxNom7hkAB/1OApAtwBYDpBVCCPXjOxvOZYLA1Zbmd=
+QBe81A6Ta5kmTQa4365HxgSSory1zAMxrbCYOp9S3fOB2fWbBIMGANG9Z8PYfhsxlcwuO9rD+kB=
+Usj0OaISsLBpAV2JjIVFRZrgpoHitY8F6eaa5mZpw=3D" target=3D"_blank" rel=3D"noop=
+ener">
+resources </a>that will help you prepare for your exam. Explore the <a href=
+=3D"https://nam11.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Flea=
+rn.microsoft.com%2Fen-us%2Fshows%2Fexam-readiness-zone%2F&amp;data=3D05%7C0=
+2%7Cnavreen.kaur%40lexisnexisrisk.com%7C1b319806442b401cd21308dcc78b18fe%7C=
+9274ee3f94254109a27f9fb15c10675d%7C0%7C0%7C638604647444199282%7CUnknown%7CT=
+WFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%=
+3D%7C0%7C%7C%7C&amp;sdata=3D%2B4BjtJkTut%2BqD69QhCB4jrMqmB7ALD6ckPd%2BBFP5U=
+e4%3D&amp;reserved=3D0" originalsrc=3D"https://learn.microsoft.com/en-us/sh=
+ows/exam-readiness-zone/" shash=3D"Qx07RRY0+MuMLJNYcYvXr6B7lmsSl3kO86ncx2PV=
+rCBgNvGkGDaDdqtmRamQhwSDcScfomh/vZRwdErch4PmDNbe5VembCTi7zGyq+fNr4uLHxPQH5g=
+ciBWDLoc4XUtpOr2r+phxQhHjMA/AM68W0gOdstj8DrCyUR3DMzmIxjo=3D" target=3D"_bla=
+nk" rel=3D"noopener">
+Microsoft Learn exam readiness zone</a> with a host of resources to help in=
+crease your chances of passing the exam. Learn more about the exam experien=
+ce, explore the
+<a href=3D"https://nam11.safelinks.protection.outlook.com/?url=3Dhttps%3A%2=
+F%2Flearn.microsoft.com%2Fen-us%2Fcredentials%2Fcertifications%2Fprepare-ex=
+am&amp;data=3D05%7C02%7Cnavreen.kaur%40lexisnexisrisk.com%7C1b319806442b401=
+cd21308dcc78b18fe%7C9274ee3f94254109a27f9fb15c10675d%7C0%7C0%7C638604647444=
+206763%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6=
+Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&amp;sdata=3DBzMw1exqM0lk2qQoLT8AVLMsllO=
+TgSX5j%2BMxAnqP8cs%3D&amp;reserved=3D0" originalsrc=3D"https://learn.micros=
+oft.com/en-us/credentials/certifications/prepare-exam" shash=3D"m/UdafTq+zP=
+QdQzBr7Mzh6olVPHwb5YQal24eitLgvwuRN3A7uxtNtibIlNbufzYWStXzTSvq80CWAat2MoCdj=
+Oy3MYBIlgfyFzXFH1zikjcRA5J1/UqbMrvMDvcuTFX3bfm3x/lwCDUuv+qzczsaxTA4HgDY7Ynk=
+KbdS5ZHU/k=3D" target=3D"_blank" rel=3D"noopener">
+exam sandbox</a> to familiarize yourself with the exam UI, and consider tak=
+ing a <a href=3D"https://nam11.safelinks.protection.outlook.com/?url=3Dhttp=
+s%3A%2F%2Flearn.microsoft.com%2Fen-us%2Fcredentials%2Fcertifications%2Fprac=
+tice-assessments-for-microsoft-certifications&amp;data=3D05%7C02%7Cnavreen.=
+kaur%40lexisnexisrisk.com%7C1b319806442b401cd21308dcc78b18fe%7C9274ee3f9425=
+4109a27f9fb15c10675d%7C0%7C0%7C638604647444213276%7CUnknown%7CTWFpbGZsb3d8e=
+yJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C=
+%7C&amp;sdata=3DF9oDne9e0G%2FY6ztL3M%2FEAm7U4uErc0BFTT%2BiZqwGNU0%3D&amp;re=
+served=3D0" originalsrc=3D"https://learn.microsoft.com/en-us/credentials/ce=
+rtifications/practice-assessments-for-microsoft-certifications" shash=3D"GP=
+WrlOwJdWeXFnFFdptPQ9HPoh+tZwMQHeaOZuAt4L6QFG5QPom16Rjpz0Oy3uRrjodISWz8U2D3m=
+7bxJMqeMn0fvCdjRuqK3Xeaiel7nTN+tc8L4azwyG4BiqNN4ojvordUrSIreHHPISUS2zS0MAOy=
+Fz7ZLTE+kGvOkuOqSzs=3D" target=3D"_blank" rel=3D"noopener">
+practice assessment</a>.&nbsp;<br>
+<br>
+Do you know what to expect on the day of the exam? <a href=3D"https://nam11=
+.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fhome.pearsonvue.com%=
+2Fmicrosoft%2F%3Futm_source%3DMSRegistration&amp;data=3D05%7C02%7Cnavreen.k=
+aur%40lexisnexisrisk.com%7C1b319806442b401cd21308dcc78b18fe%7C9274ee3f94254=
+109a27f9fb15c10675d%7C0%7C0%7C638604647444219200%7CUnknown%7CTWFpbGZsb3d8ey=
+JWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%=
+7C&amp;sdata=3DtQ2Lno4Qz5vrnPUzJ8hzMMShefFGTW%2BPdm645WqKw40%3D&amp;reserve=
+d=3D0" originalsrc=3D"https://home.pearsonvue.com/microsoft/?utm_source=3DM=
+SRegistration" shash=3D"Y/Ie2ZHiXfQxBfRhME+KerGm8RNlVhePalvEg1EuQEF+3LkIFCw=
+IXPHBcqLiwpJ++5XlqYW2VpHdBtWc0a6mp11435dSjbMGZ3DxqBmPNzzngG0OtVyKIv95wIJdc/=
+rWu6VJmMS8983Znzf6tqZ2nIlTWAYXqBrjY/HfXl3f3nU=3D" target=3D"_blank" rel=3D"=
+noopener">
+Watch these short videos from Pearson VUE</a> to ensure you are prepared.&n=
+bsp;</p>
+<p>NOTE: If you do not cancel or reschedule with 24-hour notice prior to yo=
+ur scheduled exam appointment,
+<strong>you will forfeit your exam fee and/or your company may incur a char=
+ge.</strong></p>
+<p></p>
+<p style=3D"font-family:Arial; font-size: 11pt"><span style=3D"font-weight:=
+bold"><b>Microsoft Certification Exam Appointment Details</b>:</span></p>
+<p>Order Number: =E2=80=8E0072-7999-4145=E2=80=8E</p>
+<hr>
+<table style=3D"border-width: 0;
+                border-collapse:separate;
+                text-align: left;
+                font-family:Arial;
+                font-size: 10pt;" cellpadding=3D"0" cellspacing=3D"0">
+<tbody>
+<tr>
+<td>
+<table style=3D"border-style:none;
+        border-collapse:collapse;
+        border-width:0px;
+        border-color:#000000;
+        padding:0px;
+        margin-bottom:0px;
+        font-weight: normal;
+        font-family:Arial,sans-serif;
+        font-size:10pt;
+        dir=3Dltr;
+        vertical-align: top;
+        text-align: ;">
+<tbody>
+<tr valign=3D"top" style=3D"vertical-align: top;">
+<td dir=3D"ltr" class=3D"LabelDataGridLabel" style=3D"padding-right:50px;fo=
+nt-family:Arial,sans-serif;
+                                   font-size:10pt;">
+<span style=3D"font-weight:bold">Exam:</span></td>
+<td dir=3D"ltr" style=3D"padding-right:50px;font-family:Arial,sans-serif;
+                    font-size:10pt;">
+<span style=3D"font-weight:bold">AZ-900 - Microsoft Azure Fundamentals - En=
+glish (ENU)</span>
+</td>
+</tr>
+<tr valign=3D"top" style=3D"vertical-align: top;">
+<td dir=3D"ltr" class=3D"LabelDataGridLabel" style=3D"padding-right:50px;fo=
+nt-family:Arial,sans-serif;
+                                   font-size:10pt;">
+&nbsp;</td>
+<td dir=3D"ltr" style=3D"padding-right:50px;font-family:Arial,sans-serif;
+                    font-size:10pt;">
+&nbsp; </td>
+</tr>
+<tr valign=3D"top" style=3D"vertical-align: top;">
+<td dir=3D"ltr" class=3D"LabelDataGridLabel" style=3D"padding-right:50px;fo=
+nt-family:Arial,sans-serif;
+                                   font-size:10pt;">
+Candidate:</td>
+<td dir=3D"ltr" style=3D"padding-right:50px;font-family:Arial,sans-serif;
+                    font-size:10pt;">
+Navreen Kaur </td>
+</tr>
+<tr valign=3D"top" style=3D"vertical-align: top;">
+<td dir=3D"ltr" class=3D"LabelDataGridLabel" style=3D"padding-right:50px;fo=
+nt-family:Arial,sans-serif;
+                                   font-size:10pt;">
+MS ID:</td>
+<td dir=3D"ltr" style=3D"padding-right:50px;font-family:Arial,sans-serif;
+                    font-size:10pt;">
+=E2=80=8EMS1100087313=E2=80=8E </td>
+</tr>
+<tr valign=3D"top" style=3D"vertical-align: top;">
+<td dir=3D"ltr" class=3D"LabelDataGridLabel" style=3D"padding-right:50px;fo=
+nt-family:Arial,sans-serif;
+                                   font-size:10pt;">
+Registration ID:</td>
+<td dir=3D"ltr" style=3D"padding-right:50px;font-family:Arial,sans-serif;
+                    font-size:10pt;">
+=E2=80=8E486627737=E2=80=8E </td>
+</tr>
+<tr valign=3D"top" style=3D"vertical-align: top;">
+<td dir=3D"ltr" class=3D"LabelDataGridLabel" style=3D"padding-right:50px;fo=
+nt-family:Arial,sans-serif;
+                                   font-size:10pt;">
+&nbsp;</td>
+<td dir=3D"ltr" style=3D"padding-right:50px;font-family:Arial,sans-serif;
+                    font-size:10pt;">
+&nbsp; </td>
+</tr>
+<tr valign=3D"top" style=3D"vertical-align: top;">
+<td dir=3D"ltr" class=3D"LabelDataGridLabel" style=3D"padding-right:50px;fo=
+nt-family:Arial,sans-serif;
+                                   font-size:10pt;">
+Date:</td>
+<td dir=3D"ltr" style=3D"padding-right:50px;font-family:Arial,sans-serif;
+                    font-size:10pt;">
+=E2=80=8EThursday, August 29, 2024=E2=80=8E </td>
+</tr>
+<tr valign=3D"top" style=3D"vertical-align: top;">
+<td dir=3D"ltr" class=3D"LabelDataGridLabel" style=3D"padding-right:50px;fo=
+nt-family:Arial,sans-serif;
+                                   font-size:10pt;">
+Time:</td>
+<td dir=3D"ltr" style=3D"padding-right:50px;font-family:Arial,sans-serif;
+                    font-size:10pt;">
+=E2=80=8E01:45 PM India Standard Time=E2=80=8E=E2=80=8E </td>
+</tr>
+<tr valign=3D"top" style=3D"vertical-align: top;">
+<td dir=3D"ltr" class=3D"LabelDataGridLabel" style=3D"padding-right:50px;fo=
+nt-family:Arial,sans-serif;
+                                   font-size:10pt;">
+Appointment Length (Includes time to review the Candidate Agreement, instru=
+ctions and tutorial, answer the exam questions, and provide comments; if th=
+e exam does not include labs, the time will be 20 minutes less than this by=
+ design)</td>
+<td dir=3D"ltr" style=3D"padding-right:50px;font-family:Arial,sans-serif;
+                    font-size:10pt;">
+=E2=80=8E65=E2=80=8E Minutes=E2=80=8E </td>
+</tr>
+<tr valign=3D"top" style=3D"vertical-align: top;">
+<td dir=3D"ltr" class=3D"LabelDataGridLabel" style=3D"padding-right:50px;fo=
+nt-family:Arial,sans-serif;
+                                   font-size:10pt;">
+System test:</td>
+<td dir=3D"ltr" style=3D"padding-right:50px;font-family:Arial,sans-serif;
+                    font-size:10pt;">
+=E2=80=8E<a href=3D"https://nam11.safelinks.protection.outlook.com/?url=3Dh=
+ttps%3A%2F%2Fsystem-test.onvue.com%2Fsystem_test%3Fcustomer%3Dpearson_vue%2=
+6clientcode%3DMICROSOFT%26candidate_id%3D313565378%26registration_id%3D4866=
+27737%26locale%3Den-US&amp;data=3D05%7C02%7Cnavreen.kaur%40lexisnexisrisk.c=
+om%7C1b319806442b401cd21308dcc78b18fe%7C9274ee3f94254109a27f9fb15c10675d%7C=
+0%7C0%7C638604647444224868%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQ=
+IjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&amp;sdata=3DDq9DLKu=
+pgOsIbql4h9Q2aLBGbes6AcQJ6lDBLM7vqmQ%3D&amp;reserved=3D0" originalsrc=3D"ht=
+tps://system-test.onvue.com/system_test?customer=3Dpearson_vue&amp;clientco=
+de=3DMICROSOFT&amp;candidate_id=3D313565378&amp;registration_id=3D486627737=
+&amp;locale=3Den-US" shash=3D"cqSecZ1ZRUnHRrFlPSRQgCt0JA99+EpJrbDdiTmli7dis=
+DGAYYVXyoXk5C5Nr4lWDJj88bc9Qd+AK7GduBFcJ8W0PEj1HPh9QVCPChvCpHrQecy90fC0Qd7o=
+SHuFMx/uLMiwN437QMg1e/Q+AGYbHZSEs0rLePUP0sdLqrAIoBY=3D">Test your system</a=
+>=E2=80=8E
+</td>
+</tr>
+<tr valign=3D"top" style=3D"vertical-align: top;">
+<td dir=3D"ltr" class=3D"LabelDataGridLabel" style=3D"padding-right:50px;fo=
+nt-family:Arial,sans-serif;
+                                   font-size:10pt;">
+Exam check-in:&nbsp;</td>
+<td dir=3D"ltr" style=3D"padding-right:50px;font-family:Arial,sans-serif;
+                    font-size:10pt;">
+=E2=80=8E<a href=3D"https://nam11.safelinks.protection.outlook.com/?url=3Dh=
+ttps%3A%2F%2Fexamlaunchpad.pearsonvue.com%2Fentry-point%2Flaunch-exam%2FMIC=
+ROSOFT%2FOP%3FregistrationToken%3DDkIQVFkpZ3DZKT16g1LdvrM%252BHv%252FacQkjY=
+ifqEqQUyikukSjF2qCwykbRvTXXxQdtMbHmoocdvyewZcz4CCIMjkEvXx5%252FNQOFz2Fqij2F=
+7CFUJOtBz%252BU9MGI6p7QE%252BOfTxxmP2silM9%252FBzVRP%252BwBKDA%253D%253D%26=
+locale%3Den-US&amp;data=3D05%7C02%7Cnavreen.kaur%40lexisnexisrisk.com%7C1b3=
+19806442b401cd21308dcc78b18fe%7C9274ee3f94254109a27f9fb15c10675d%7C0%7C0%7C=
+638604647444230767%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2lu=
+MzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&amp;sdata=3DQ3jtKTWcowtZQ0Y=
+t2uP9xT%2FmBVtgNPRmKcQVUmQdFG8%3D&amp;reserved=3D0" originalsrc=3D"https://=
+examlaunchpad.pearsonvue.com/entry-point/launch-exam/MICROSOFT/OP?registrat=
+ionToken=3DDkIQVFkpZ3DZKT16g1LdvrM%2BHv%2FacQkjYifqEqQUyikukSjF2qCwykbRvTXX=
+xQdtMbHmoocdvyewZcz4CCIMjkEvXx5%2FNQOFz2Fqij2F7CFUJOtBz%2BU9MGI6p7QE%2BOfTx=
+xmP2silM9%2FBzVRP%2BwBKDA%3D%3D&amp;locale=3Den-US" shash=3D"gjSvyyO4MtgJJL=
+2yj4io+aA8GGptXtrMCtZeJjFUPuJb2vT1P2WNMc3m0pA+0ZYDI1MD0zvhdObr6Amx14mBzJqcD=
+8TmvDgrQmwfw68DA9qNOUIZYqCIeCQsraE/HMgtEA/Od46N01Xqnlw/PWqkOmDvLCqxho8nefhZ=
+A1hatdI=3D">Check
+ in to start exam</a>=E2=80=8E </td>
+</tr>
+<tr valign=3D"top" style=3D"vertical-align: top;">
+<td dir=3D"ltr" class=3D"LabelDataGridLabel" style=3D"padding-right:50px;fo=
+nt-family:Arial,sans-serif;
+                                   font-size:10pt;">
+</td>
+<td dir=3D"ltr" style=3D"padding-right:50px;font-family:Arial,sans-serif;
+                    font-size:10pt;">
+=E2=80=8ECheck-in begins 30 minutes prior to the appointment time or, sign =
+into your candidate website.=E2=80=8E
+</td>
+</tr>
+<tr valign=3D"top" style=3D"vertical-align: top;">
+<td dir=3D"ltr" class=3D"LabelDataGridLabel" style=3D"padding-right:50px;fo=
+nt-family:Arial,sans-serif;
+                                   font-size:10pt;">
+&nbsp;</td>
+<td dir=3D"ltr" style=3D"padding-right:50px;font-family:Arial,sans-serif;
+                    font-size:10pt;">
+&nbsp; </td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<div></div>
+<hr>
+<p style=3D"font-family:Arial; font-size: 11pt"><span style=3D"font-weight:=
+bold"></p>
+<p><strong>Admission Policy</strong></p>
+</span>
+<p></p>
+<p>Please note this exam is proctored in English and Japanese only. There i=
+s not an option for local language proctoring at this time.
+<br>
+<br>
+<strong>Before exam day:</strong> <br>
+<br>
+Test your system:<br>
+<br>
+=E2=80=A2 Use the same testing space, computer, and internet connection you=
+ plan to use on exam day.
+<br>
+=E2=80=A2 We recommend testing on a personal computer with a webcam. Work c=
+omputers generally have more restrictions that may prevent successful deliv=
+ery.
+<br>
+=E2=80=A2 Do not take your exam in a setting with a corporate firewall (inc=
+luding VPN). If you are taking your online exam in your office, please aler=
+t your Network Administrator to the
+<a href=3D"https://nam11.safelinks.protection.outlook.com/?url=3Dhttps%3A%2=
+F%2Fhome.pearsonvue.com%2Fop%2FOnVUE-technical-requirements&amp;data=3D05%7=
+C02%7Cnavreen.kaur%40lexisnexisrisk.com%7C1b319806442b401cd21308dcc78b18fe%=
+7C9274ee3f94254109a27f9fb15c10675d%7C0%7C0%7C638604647444236696%7CUnknown%7=
+CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn=
+0%3D%7C0%7C%7C%7C&amp;sdata=3Dh01ZXh3IJpOjM3jGFpnfOrszsAoN6RxZnRVwaNGBRyo%3=
+D&amp;reserved=3D0" originalsrc=3D"https://home.pearsonvue.com/op/OnVUE-tec=
+hnical-requirements" shash=3D"oqBttFfb6Ow9SQ0wr2P+OlEqXWeqp9o/2Mn07UpoiqTRZ=
+OlBYI9kvD1WvgqKAKa5k0ucrPIxMPpfJoWRqPLaTHYpaMC+ec45Yr9GONHDMFt+FGJqb/99niiP=
+bKnesmMnk4Bf2ddOgGWU84W2GnC+H5cFa6QdUWLcV9JQkmjcHQo=3D" target=3D"_blank" r=
+el=3D"noopener">
+OnVUE system requirements</a>. <br>
+=E2=80=A2 Make sure you have a reliable, fast internet connection to downlo=
+ad your exam and support a webcam stream.
+<br>
+<br>
+Acquire an acceptable form of ID: <br>
+One (1) valid, unexpired, government-issued ID with a signature and photo. =
+The name must match the name on the registration exactly.
+<br>
+<br>
+Acceptable forms of ID include: <br>
+<br>
+=E2=80=A2 Passport <br>
+=E2=80=A2 Driver=E2=80=99s license <br>
+=E2=80=A2 Non-US Military ID (including spouse and dependents) <br>
+=E2=80=A2 Identification card (national or local) <br>
+=E2=80=A2 Registration card (green card, permanent residence, visa) <br>
+<br>
+Unacceptable forms of ID: <br>
+<br>
+=E2=80=A2 Unacceptable forms of identification include renewal forms with e=
+xpired IDs, government-issued name change documents with government ID
+<br>
+=E2=80=A2 If your identification is not considered valid, you will not be p=
+ermitted to complete your exam and you are unlikely to receive a refund.
+<br>
+<br>
+By law, certain IDs must not be photocopied, digitized, or captured on came=
+ra. Because of this, Pearson VUE cannot accept restricted IDs (including bu=
+t not limited to U.S. military or certain secure access IDs) as identificat=
+ion for online testing. For those
+ with an India Aadhaar ID, please refer to these <a href=3D"https://nam11.s=
+afelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fhome.pearsonvue.com%2F=
+Policies%2FAadhaar-ID-Policy-English&amp;data=3D05%7C02%7Cnavreen.kaur%40le=
+xisnexisrisk.com%7C1b319806442b401cd21308dcc78b18fe%7C9274ee3f94254109a27f9=
+fb15c10675d%7C0%7C0%7C638604647444243407%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC=
+4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&amp;s=
+data=3DA90%2BU4t%2BguiGOg%2ByylwRo6UyJ%2BHjIUkugR4Sn8diyZA%3D&amp;reserved=
+=3D0" originalsrc=3D"https://home.pearsonvue.com/Policies/Aadhaar-ID-Policy=
+-English" shash=3D"iUSAKS6YZHA0QYy36n0JcKrTJG+2CSgNmWrrQIhoh9bHA2Cz0e10aHJv=
+2UgS90/RJJAiQjvHnX1DtG7FyJyWIoyYBfnRuxy/7DfNOHskOKLkpN56egVEyGHIq4qf2RUbhHf=
+2UqMFhmjLh/NYAf5iDJ0hvehuvWFGTZimpT4nWi0=3D" title=3D"Original URL: https:/=
+/home.pearsonvue.com/Policies/Aadhaar-ID-Policy-English. Click or tap if yo=
+u trust this link.">
+specific policies.</a><br>
+<br>
+Prepare your testing space: <br>
+<br>
+=E2=80=A2 Find a quiet, disruption-free, well-lit space. Please be aware th=
+at background light or the sun rising/setting could create visibility issue=
+s for the proctor.
+<br>
+=E2=80=A2 You will be required to take four photos of your testing space du=
+ring check-in. We recommend using a mobile device.
+<br>
+=E2=80=A2 You can only use one monitor. <br>
+=E2=80=A2 Your desk should be clear. <br>
+<br>
+For <a href=3D"https://nam11.safelinks.protection.outlook.com/?url=3Dhttps%=
+3A%2F%2Fhome.pearsonvue.com%2Fmicrosoft%2Fonvue&amp;data=3D05%7C02%7Cnavree=
+n.kaur%40lexisnexisrisk.com%7C1b319806442b401cd21308dcc78b18fe%7C9274ee3f94=
+254109a27f9fb15c10675d%7C0%7C0%7C638604647444250215%7CUnknown%7CTWFpbGZsb3d=
+8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%=
+7C%7C&amp;sdata=3Dn42wb2%2FSYbLWccVMHMyzf5%2FQMLpRPjQ2shH09obTJ8A%3D&amp;re=
+served=3D0" originalsrc=3D"https://home.pearsonvue.com/microsoft/onvue" sha=
+sh=3D"X80IH1MxvfsgVUeK3Dp00RjXC6U3up5Mu0HOK2WutqZ9oPC/wfVnI3U75EGUQyvFeMC1I=
+eegIN1cTmCr0hOvPUhk41A/jIWNvm+v5knOO5DI51xlZ7/e4BRX2T0bOCl2r7ifG7cIb/pG+5fV=
+5H5SvmvQt/VFPNX09CbOkRRli4Q=3D" target=3D"_blank" rel=3D"noopener">
+more information</a>, review online proctored exam policies, procedures, an=
+d minimum requirements.<br>
+<br>
+<strong>On exam day:</strong> <br>
+<br>
+=E2=80=A2 We recommend logging into your account 30 minutes early to start =
+the check-in process and to allow for any troubleshooting.
+<br>
+=E2=80=A2 This allows optimal preparedness but does not guarantee an early =
+admittance or start time.
+<br>
+=E2=80=A2 If you are more than 15 minutes late after your scheduled exam ti=
+me, you will be unable to begin your exam and you are unlikely to receive a=
+ refund.
+<br>
+<br>
+To check into your exam: <br>
+<br>
+=E2=80=A2 Select Check-in to start exam on your confirmation, reschedule or=
+ reminder emails)
+<br>
+=E2=80=A2 Log in: <a href=3D"https://nam11.safelinks.protection.outlook.com=
+/?url=3Dhttps%3A%2F%2Fwww.microsoft.com%2Fen-us%2Flearning%2Fdashboard.aspx=
+&amp;data=3D05%7C02%7Cnavreen.kaur%40lexisnexisrisk.com%7C1b319806442b401cd=
+21308dcc78b18fe%7C9274ee3f94254109a27f9fb15c10675d%7C0%7C0%7C63860464744425=
+7885%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik=
+1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&amp;sdata=3DhXJzjxPc4FXJW6XOru2b0tKuFSS6f=
+r9LAjyM6sgjNWA%3D&amp;reserved=3D0" originalsrc=3D"https://www.microsoft.co=
+m/en-us/learning/dashboard.aspx" shash=3D"uAHIiClrCQIWHvAhPMJr0tOPuAxLbIt/9=
+5g4oR+hGTLIUGT9oMUvhBcbrZao/fWNp0cHqji5FIMcU63XXxoXwJt20KXhlnHg4INyGwBIvhlS=
+58/qBDxQHSo1IwFt1ZM8LQH1Z7AoZK2N3qWv+TgPWOaKHP0jb44pfdIwci5lXj4=3D" target=
+=3D"_blank" rel=3D"noopener">
+https://www.microsoft.com/en-us/learning/dashboard.aspx</a><br>
+=E2=80=A2 View your upcoming appointment. <br>
+=E2=80=A2 Follow the on-screen prompts to complete the check-in process. <b=
+r>
+=E2=80=A2 You will need to complete check-in before you can start your exam=
+. <br>
+<br>
+Exam rules during testing <br>
+<br>
+=E2=80=A2 You may not access unauthorized materials, I.e. mobile devices, w=
+atches, and anything not allowed by test sponsor
+<br>
+=E2=80=A2 No one else should appear through the webcam during the exam and =
+no one else=E2=80=99s voice should be heard.
+<br>
+=E2=80=A2 No speaking aloud during exam</p>
+<p style=3D"font-family:Arial; font-size: 11pt"><span style=3D"font-weight:=
+bold"></p>
+<p><strong>Reschedule Policy</strong></p>
+</span>
+<p></p>
+<p>If you need to reschedule your appointment, be sure to do it no later th=
+an 24 hours prior to your scheduled exam. If you do not reschedule your app=
+ointment 24 hours prior to your scheduled exam, you will forfeit your exam =
+fee and/or your company may incur
+ a charge.</p>
+<p style=3D"font-family:Arial; font-size: 11pt"><span style=3D"font-weight:=
+bold"></p>
+<p><strong>Cancellation Policy</strong></p>
+</span>
+<p></p>
+<p>If you need to cancel your appointment, be sure to do it no later than 2=
+4 hours prior to your scheduled exam. If you do not cancel your appointment=
+ 24 hours prior to your scheduled exam, you will forfeit your exam fee and/=
+or your company may incur a charge.&nbsp;</p>
+<p style=3D"font-family:Arial; font-size: 11pt"><span style=3D"font-weight:=
+bold">Additional Information</span></p>
+The following data is deleted from the OnVUE system within 60 days:<br>
+<br>
+=E2=80=A2 The recorded video of your testing session<br>
+=E2=80=A2 Your identification, such as license or passport<br>
+<br>
+Your headshot is retained for security and use on your Score Report for the=
+ life of Certification. For country-specific data retention regulations ple=
+ase reference your local government agency. For additional questions or req=
+uests for photo deletion, please
+ contact our operations team at <a href=3D"https://nam11.safelinks.protecti=
+on.outlook.com/?url=3Dhttps%3A%2F%2Fhome.pearsonvue.com%2Fmicrosoft%2Fconta=
+ct&amp;data=3D05%7C02%7Cnavreen.kaur%40lexisnexisrisk.com%7C1b319806442b401=
+cd21308dcc78b18fe%7C9274ee3f94254109a27f9fb15c10675d%7C0%7C0%7C638604647444=
+264650%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6=
+Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&amp;sdata=3DJACRSECNJA7%2Ff2qOe%2BLsVrD=
+5mIc0hd8BDSM6QW2XXI4%3D&amp;reserved=3D0" originalsrc=3D"https://home.pears=
+onvue.com/microsoft/contact" shash=3D"PkFvFXejSI6bz1ix8V6pL2zKvQOZWj1nUnWZq=
+CDXkr4Gp3PArq/J93f/Lfl+E67hGiYTq4ZXFA5JiezdBGtQBLRoTZzaR8HDuQFLlkE5wxZR8AjW=
+TB3a5UVGrPn+vGipGJPIkEJ/TQhwX+ynApf+FjBpjt7/eEJgz2pUXRYuGEk=3D" target=3D"_=
+blank" rel=3D"noopener">
+https://home.pearsonvue.com/microsoft/contact</a>.
+<hr>
+<p></p>
+<p>Pearson VUE will not be held responsible for expenses incurred beyond th=
+e cost of the exam, including but not limited to travel expenses and lost w=
+ages on the day of the exam.</p>
+<p></p>
+<p></p>
+<p>Pearson VUE's goal is to make your exam experience a pleasant one. We wa=
+nt to thank you for selecting Pearson VUE as your exam service provider, an=
+d we look forward to serving you again. Please feel free to contact us with=
+ your comments or questions. Our
+ contact information can be found on our website: <a href=3D"https://nam11.=
+safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fhome.pearsonvue.com%2=
+FTest-takers%2FCustomer-service.aspx&amp;data=3D05%7C02%7Cnavreen.kaur%40le=
+xisnexisrisk.com%7C1b319806442b401cd21308dcc78b18fe%7C9274ee3f94254109a27f9=
+fb15c10675d%7C0%7C0%7C638604647444270660%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC=
+4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&amp;s=
+data=3Dti7yr%2BPygs4VIxjkImebRsl4T9Z6Xfb%2FX5qZDnoTm4U%3D&amp;reserved=3D0"=
+ originalsrc=3D"https://home.pearsonvue.com/Test-takers/Customer-service.as=
+px" shash=3D"k7KIbeM0F176n68nVffyYwAg8x3DE/kcJPUkfdNhvXZ1Qiu4Y0xpXB3IQKeEOr=
+3BpOosVkUrFwBxRkA1cJ9Q4oFEBKd4IFmVfELW1X9Cyj6kwdMGKuymV1ucMIbcWjlkqJ0BH9JOM=
+5WBfr8ZBqC3dBqNGjPs1/Uz3vAkHxzSddY=3D" target=3D"_blank" rel=3D"noopener">
+pearsonvue.com/contact</a>.</p>
+<p></p>
+<p>Sincerely,</p>
+<p></p>
+<p>Pearson VUE</p>
+<p></p>
+<hr>
+<div style=3D"text-align:center; width: 100%"><a href=3D"https://nam11.safe=
+links.protection.outlook.com/?url=3Dhttp%3A%2F%2Fwww.mindhub.com%2Fmicrosof=
+t-certification-practice-tests-and-study-guides-s%2F64.htm%3Futm_source%3Dp=
+earsonvue%26utm_medium%3Dconfirmemailbanner%26utm_campaign%3Dmsofficialprac=
+tice%23%2F%3F_%3D1%26filter.manufacturer%3DMeasureUp%26page%3D1&amp;data=3D=
+05%7C02%7Cnavreen.kaur%40lexisnexisrisk.com%7C1b319806442b401cd21308dcc78b1=
+8fe%7C9274ee3f94254109a27f9fb15c10675d%7C0%7C0%7C638604647444276295%7CUnkno=
+wn%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVC=
+I6Mn0%3D%7C0%7C%7C%7C&amp;sdata=3DGik%2Bktf49jPqn3NIDhEYwwoWctL3fYNYQhRdVZ1=
+Kfpo%3D&amp;reserved=3D0" originalsrc=3D"http://www.mindhub.com/microsoft-c=
+ertification-practice-tests-and-study-guides-s/64.htm?utm_source=3Dpearsonv=
+ue&amp;utm_medium=3Dconfirmemailbanner&amp;utm_campaign=3Dmsofficialpractic=
+e#/?_=3D1&amp;filter.manufacturer=3DMeasureUp&amp;page=3D1" shash=3D"ixUlxN=
+HZaS7hAVVciS4V4RL/4hAa9DUiJm+JUk+RsU/IBOm2yTZ3HbK/2IqRX1tojYfix5XntaX0KTHfX=
+v7INSxTqvYdN6mPZ8uo4+sjxkFeYj5T+fVxXY7yufT/l/erRKNUCG7/IaTxwbNdBCJvl2X+v7mG=
+wVgB2euXx2NiZpY=3D"><img src=3D"http://mindhub.com/v/vspfiles/images/save-1=
+0.jpg"></a>
+</div>
+<br>
+<div style=3D"text-align: center;">
+<p></p>
+<p style=3D"text-align: center;"><a href=3D"https://nam11.safelinks.protect=
+ion.outlook.com/?url=3Dhttp%3A%2F%2Fwsr.pearsonvue.com%2Flegal%2Fprivacy%2F=
+&amp;data=3D05%7C02%7Cnavreen.kaur%40lexisnexisrisk.com%7C1b319806442b401cd=
+21308dcc78b18fe%7C9274ee3f94254109a27f9fb15c10675d%7C0%7C0%7C63860464744428=
+2326%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik=
+1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&amp;sdata=3DLLKBikmKG%2FCadmcYKEpnne1f%2F=
+KtuRMnxRgzNyqEhnW4%3D&amp;reserved=3D0" originalsrc=3D"http://wsr.pearsonvu=
+e.com/legal/privacy/" shash=3D"y19IqK52nmWEKQoQNf0LtKJkdLNoUj059Gug+HG23wav=
+ypv5ySGod9T3sLjC6nMUU70IvNzm9GLAZ6/golgnT/5bIUInG8ojpftiZNXAaHGtw8wugdqvKx8=
+Vq07vfjCg70gouQyaj+RJ9DNANi3nuLld7Un8DP++RKXmdT6bieM=3D" target=3D"_blank" =
+rel=3D"noopener">http://wsr.pearsonvue.com/legal/privacy/</a></p>
+<p></p>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<table style=3D"text-align: center; width: 100%" border=3D"0" cellspacing=
+=3D"0" cellpadding=3D"0">
+<tbody>
+<tr>
+<td style=3D"text-align: right; width:100%"><img src=3D"http://wsr.pearsonv=
+ue.com/images/Pearson_WebBar_Bottom_Blue_RGB.jpg   ">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+------=_Part_903400_1394642358.1724867935470--
